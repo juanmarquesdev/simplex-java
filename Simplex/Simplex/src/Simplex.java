@@ -51,6 +51,26 @@ public class Simplex {
 	
 	public static double[][] funcaoObjetivo(double[][] tabela, int qntVarDecisao) {
 		
+		int key = 0;
+		
+		System.out.println("A função é para: ");
+		System.out.println(" Maximizar (Digite 1)");
+		System.out.println(" Minimizar (Digite 2)");
+		
+		while(key != 1 && key != 2) {
+			key = Integer.parseInt(sc.nextLine());
+			switch (key) {
+			case 1:
+				break;
+			case 2:
+				break;
+			default:
+				System.out.println("Opção inválida! Digite novamente.");
+				key = Integer.parseInt(sc.nextLine());
+			}
+		}
+		
+		
 		
 		for(int i = 0; i < tabela[0].length; i++) {
 			if(i == 0) {
@@ -60,6 +80,14 @@ public class Simplex {
 				tabela[0][i] = (-1) * Double.parseDouble(sc.nextLine());
 			} else {
 				tabela[0][i] = 0;
+			}
+		}
+		
+		if(key == 2) {
+			for (int m = 1; m < tabela[0].length; m++) {
+				if (tabela[0][m] != 0) {
+					tabela[0][m] = tabela[0][m] * (-1);
+				}
 			}
 		}
 				
@@ -101,21 +129,21 @@ public class Simplex {
 						key = Integer.parseInt(sc.nextLine());
 						
 						switch (key) {
-							case 1: 
-								tabela[r][i] = -1;
-								break;
+						case 1: 
+							tabela[r][i] = -1;
+							break;
+								
+						case 2:
+							tabela[r][i] = 1;
+							break;
 							
-							case 2:
-								tabela[r][i] = 1;
-								break;
-								
-							case 3:
-								tabela[r][i] = 0;
-								break;
-								
-							default:
-								System.out.println("Opção inválida! Digite novamente.");
-								key = Integer.parseInt(sc.nextLine());
+						case 3:
+							tabela[r][i] = 0;
+							break;
+							
+						default:
+							System.out.println("Opção inválida! Digite novamente.");
+							key = Integer.parseInt(sc.nextLine());
 						}
 					}
 					
