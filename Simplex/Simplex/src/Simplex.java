@@ -89,6 +89,16 @@ public class Simplex {
 				}
 			}
 		}
+		
+		System.out.print("Função objetivo: Z = ");
+		
+		for (int k = 1; k <= qntVarDecisao; k++) {
+			if(k < qntVarDecisao) {
+				System.out.printf("%.0fX%d + ", tabela[0][k]*(-1), k);
+			}else {
+				System.out.printf("%.0fX%d%n", tabela[0][k]*(-1), k);
+			}
+		}
 				
 		return tabela;
 	}
@@ -96,6 +106,9 @@ public class Simplex {
 	public static double[][] gerarRestricoes(double[][] tabela, int qntRestricao, int qntVarDecisao) {
 		
 		int key = 0;
+		int keyArray[];
+		keyArray = new int[qntRestricao+1];
+		
 		
 		for(int r = 1; r <= qntRestricao; r++) {
 			for(int i = 1; i < tabela[r].length; i++) {
@@ -122,6 +135,7 @@ public class Simplex {
 					System.out.println(" = igual (Digite 3)");
 					
 					key = 0;
+					keyArray[0] = 0;
 					
 					while(key != 1 && key != 2 && key != 3 ) {
 						
@@ -130,14 +144,17 @@ public class Simplex {
 						switch (key) {
 						case 1: 
 							tabela[r][i] = -1;
+							keyArray[r] = 2;
 							break;
 								
 						case 2:
 							tabela[r][i] = 1;
+							keyArray[r] = 2;
 							break;
 							
 						case 3:
 							tabela[r][i] = 0;
+							keyArray[r] = 3;
 							break;
 							
 						default:
@@ -148,6 +165,30 @@ public class Simplex {
 					
 				}
 			}
+		}
+		
+		System.out.println("Restrições: ");
+		for(int k = 1; k <= qntRestricao; k++) {
+			for(int a = 1; a < tabela[k].length; a++) {
+				if (a < qntVarDecisao) {
+					System.out.printf("%.0fX%d + ", tabela[k][a], a);
+				}else if(a == qntVarDecisao) {
+					System.out.printf("%.0fX%d ", tabela[k][a], a);
+				}else if(a == tabela[k].length-1) {
+					switch (keyArray[k]) {
+					case 1:
+						System.out.printf(">= %.0f%n", tabela[k][a]);
+						break;
+					case 2:
+						System.out.printf("<= %.0f%n", tabela[k][a]);
+						break;
+					case 3: 
+						System.out.printf("= %.0f%n", tabela[k][a]);
+						break;
+					}
+				}
+			}
+			
 		}
 		
 		return tabela;
