@@ -66,7 +66,6 @@ public class Simplex {
 				break;
 			default:
 				System.out.println("Opção inválida! Digite novamente.");
-				key = Integer.parseInt(sc.nextLine());
 			}
 		}
 		
@@ -143,7 +142,6 @@ public class Simplex {
 							
 						default:
 							System.out.println("Opção inválida! Digite novamente.");
-							key = Integer.parseInt(sc.nextLine());
 						}
 					}
 					
