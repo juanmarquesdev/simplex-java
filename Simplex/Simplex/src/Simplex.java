@@ -28,14 +28,9 @@ public class Simplex {
 		gerarTabela(tabela);
 		funcaoObjetivo(tabela, qntVarDecisao);
 		gerarRestricoes(tabela, qntRestricao, qntVarDecisao);
-		
 		printTabela(tabela, linha, coluna, qntVarDecisao, qntRestricao);
 		
 	}
-	
-	
-	
-	
 	
 	public static double[][] gerarTabela(double[][] tabela) {
 		
@@ -69,8 +64,6 @@ public class Simplex {
 			System.out.println();
 		}
 	}
-	
-	
 	
 	public static double[][] funcaoObjetivo(double[][] tabela, int qntVarDecisao) {
 		
@@ -219,5 +212,38 @@ public class Simplex {
 		return tabela;
 	}
 	
-	
+	public static int colunaPivot(double[][] tabela, int coluna) {
+		
+		double value = 0;
+		int colunaPivot = 0;
+		
+		for(int i = 0; i < coluna; i++) {
+			if(tabela[0][i] < value) {
+				value = tabela[0][i];
+				colunaPivot = i;
+			}
+		}
+
+		return colunaPivot;
+	} 
+
+	public static int linhaPivot(double[][] tabela, int linha, int coluna, int colunaPivot) {
+		int linhaPivot = 0;
+		
+		double resultado = 999999999;
+		
+		for(int i = 2; i < linha; i++) {
+			if(tabela[1][coluna -1] != 0 && tabela[1][colunaPivot] != 0) {
+				if(tabela[i][coluna -1] / tabela[i][colunaPivot] < resultado) {
+					resultado = tabela[i][coluna -1] / tabela[i][colunaPivot];
+					linhaPivot = i;
+				}
+			}
+			
+		}
+		
+		
+		return linhaPivot;
+	}
+
 }
