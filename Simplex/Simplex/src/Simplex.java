@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Simplex {
@@ -28,15 +29,13 @@ public class Simplex {
 		funcaoObjetivo(tabela, qntVarDecisao);
 		gerarRestricoes(tabela, qntRestricao, qntVarDecisao);
 		
-		
-		for(int i = 0; i < tabela.length; i++) {
-			for(int n = 0; n < tabela[0].length; n++) {
-				System.out.printf("%.2f ", tabela[i][n]);
-			}
-			System.out.println();
-		}
+		printTabela(tabela, linha, coluna, qntVarDecisao, qntRestricao);
 		
 	}
+	
+	
+	
+	
 	
 	public static double[][] gerarTabela(double[][] tabela) {
 		
@@ -48,6 +47,30 @@ public class Simplex {
 		
 		return tabela;
 	}
+	
+	public static void printTabela(double[][] tabela, int linha, int coluna, int qntVarDecisao, int qntRestricao) {
+		System.out.printf("\tZ");
+		
+		for(int f = 1; f <= qntVarDecisao; f++) {
+			System.out.printf("\tX%d", f);
+		}
+		
+		for(int g = 1; g <= qntRestricao; g++) {
+			System.out.printf("\tF%d", g);
+		}
+		System.out.printf("\tB");
+		System.out.println();
+		
+		for(int i = 0; i < linha; i++) {
+			System.out.printf("L%d", i + 1);
+			for(int c = 0; c < coluna; c++) {
+				System.out.printf("\t%.1f", tabela[i][c]);
+			}
+			System.out.println();
+		}
+	}
+	
+	
 	
 	public static double[][] funcaoObjetivo(double[][] tabela, int qntVarDecisao) {
 		
@@ -89,6 +112,8 @@ public class Simplex {
 				}
 			}
 		}
+		
+		
 		
 		System.out.print("Função objetivo: Z = ");
 		
