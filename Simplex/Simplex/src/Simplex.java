@@ -14,10 +14,10 @@ public class Simplex {
 		int qntRestricao;
 		double[][] tabela;
 		
-		System.out.println("Quantas variaveis de decis„o tem o problema? ");
+		System.out.println("Quantas variaveis de decis√£o tem o problema? ");
 		qntVarDecisao = Integer.parseInt(sc.nextLine());
 		
-		System.out.println("Quantas restriÁıes? ");
+		System.out.println("Quantas restri√ß√µes? ");
 		qntRestricao = Integer.parseInt(sc.nextLine());
 		
 		linha = qntRestricao + 1;
@@ -69,7 +69,7 @@ public class Simplex {
 		
 		int key = 0;
 		
-		System.out.println("A funÁ„o È para: ");
+		System.out.println("A fun√ß√£o √© para: ");
 		System.out.println(" Maximizar (Digite 1)");
 		System.out.println(" Minimizar (Digite 2)");
 		
@@ -81,7 +81,7 @@ public class Simplex {
 			case 2:
 				break;
 			default:
-				System.out.println("OpÁ„o inv·lida! Digite novamente.");
+				System.out.println("Op√ß√£o inv√°lida! Digite novamente.");
 			}
 		}
 		
@@ -108,7 +108,7 @@ public class Simplex {
 		
 		
 		
-		System.out.print("FunÁ„o objetivo: Z = ");
+		System.out.print("Fun√ß√£o objetivo: Z = ");
 		
 		for (int k = 1; k <= qntVarDecisao; k++) {
 			if(k < qntVarDecisao) {
@@ -147,7 +147,7 @@ public class Simplex {
 					}
 				} else if (i == (qntVarDecisao + r)) {
 					
-					System.out.println("O resultado È: ");
+					System.out.println("O resultado √©: ");
 					System.out.println(" >= maior igual (Digite 1)");
 					System.out.println(" <= menor igual (Digite 2)");
 					System.out.println(" = igual (Digite 3)");
@@ -176,7 +176,7 @@ public class Simplex {
 							break;
 							
 						default:
-							System.out.println("OpÁ„o inv·lida! Digite novamente.");
+							System.out.println("Op√ß√£o inv√°lida! Digite novamente.");
 						}
 					}
 					
@@ -185,7 +185,7 @@ public class Simplex {
 			}
 		}
 		
-		System.out.println("RestriÁıes: ");
+		System.out.println("Restri√ß√µes: ");
 		for(int k = 1; k <= qntRestricao; k++) {
 			for(int a = 1; a < tabela[k].length; a++) {
 				if (a < qntVarDecisao) {
@@ -233,10 +233,13 @@ public class Simplex {
 		double resultado = 999999999;
 		
 		for(int i = 2; i < linha; i++) {
-			if(tabela[1][coluna -1] != 0 && tabela[1][colunaPivot] != 0) {
+			if(tabela[i][colunaPivot] != 0) {
 				if(tabela[i][coluna -1] / tabela[i][colunaPivot] < resultado) {
-					resultado = tabela[i][coluna -1] / tabela[i][colunaPivot];
-					linhaPivot = i;
+					if(resultado > 0) {
+						resultado = tabela[i][coluna -1] / tabela[i][colunaPivot];
+						linhaPivot = i;
+					}
+					
 				}
 			}
 			
