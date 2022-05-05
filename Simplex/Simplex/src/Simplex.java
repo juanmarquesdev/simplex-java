@@ -232,7 +232,7 @@ public class Simplex {
 		
 		double resultado = 999999999;
 		
-		for(int i = 2; i < linha; i++) {
+		for(int i = 1; i < linha; i++) {
 			if(tabela[i][colunaPivot] != 0) {
 				if(tabela[i][coluna -1] / tabela[i][colunaPivot] < resultado) {
 					if(resultado > 0) {
