@@ -32,6 +32,38 @@ public class Simplex {
 		
 	}
 	
+	public static double[][] novasLinhas(double[][] tabela, int colunaPivot) {
+		
+		int linhaPivot = linhaPivot(tabela, linha, coluna, colunaPivot(tabela, coluna));
+		double elementoDaLinha;
+		double[] novaLinhaPivotCalculo = new double[coluna];
+		
+		for (int i = 0; i < tabela.length; i++) {
+			if(i != linhaPivot) {
+				elementoDaLinha = tabela[i][colunaPivot]; 
+				for(int n = 0; n < novaLinhaPivotCalculo.length; n++ ) {
+					novaLinhaPivotCalculo[n] = tabela[linhaPivot][n] * elementoDaLinha * (-1);
+					tabela[i][n] = tabela[i][n] + novaLinhaPivotCalculo[n];
+				}
+				
+			}
+		}
+		
+		
+		return tabela;
+	}
+	
+	public static double[][] novaLinhaPivot(double[][] tabela, int linhaPivot, int colunaPivot) {
+		
+		double elementoPivot = tabela[linhaPivot][colunaPivot];
+		
+		for(int i = 0; i < tabela[linhaPivot].length ; i++) {
+			tabela[linhaPivot][i] = tabela[linhaPivot][i] / elementoPivot;
+		}
+		
+		return tabela;
+	}	
+	
 	public static double[][] gerarTabela(double[][] tabela) {
 		
 		for(int i = 0; i < tabela.length; i++) {
@@ -232,7 +264,7 @@ public class Simplex {
 		
 		double resultado = 999999999;
 		
-		for(int i = 2; i < linha; i++) {
+		for(int i = 1; i < linha; i++) {
 			if(tabela[1][coluna -1] != 0 && tabela[1][colunaPivot] != 0) {
 				if(tabela[i][coluna -1] / tabela[i][colunaPivot] < resultado) {
 					resultado = tabela[i][coluna -1] / tabela[i][colunaPivot];
