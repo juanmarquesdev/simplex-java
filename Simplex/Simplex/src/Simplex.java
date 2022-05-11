@@ -66,7 +66,7 @@ public class Simplex {
 				if(c <= qntVarDecisao) {
 					System.out.printf("X%d = %.2f%n", c, tabela[index][coluna-1]);
 					
-				} else if( c > qntVarDecisao && c < coluna -2) {
+				} else if( c > qntVarDecisao && c < coluna -1) {
 					System.out.printf("F%d = %.2f%n", c - qntVarDecisao, tabela[index][coluna-1]);
 				}
 			}
