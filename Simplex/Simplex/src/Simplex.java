@@ -30,6 +30,52 @@ public class Simplex {
 		gerarRestricoes(tabela, qntRestricao, qntVarDecisao);
 		printTabela(tabela, linha, coluna, qntVarDecisao, qntRestricao);
 		
+		System.out.println();
+		
+		while(colunaPivot(tabela, coluna) != 0) {
+			novaLinhaPivot(tabela, linhaPivot(tabela, linha, coluna, colunaPivot(tabela, coluna)), colunaPivot(tabela, coluna));
+			novasLinhas(tabela, colunaPivot(tabela, coluna));
+			printTabela(tabela, linha, coluna, qntVarDecisao, qntRestricao);
+			printResultados(tabela, linha, coluna, qntVarDecisao, qntRestricao);
+		}
+		
+		
+	}
+	
+	public static void printResultados(double[][] tabela, int linha, int coluna, int qntVarDecisao, int qntRestricao) {
+		
+		int index = 0;
+		int qntZero = 0;
+		int qntUm = 0;
+		
+		System.out.printf("Z = %.2f%n", tabela[0][coluna-1]);
+		
+		for (int c = 1; c < coluna-1; c++) {
+			for (int l = 0; l < linha; l++) {
+				if (tabela[l][c] == 0) {
+					qntZero++;
+					
+				} else if(tabela[l][c] == 1) {
+					qntUm++;
+					index = l;
+				}
+			}
+			if(qntUm == 1 && qntZero == qntRestricao) {
+				if(c <= qntVarDecisao) {
+					System.out.printf("X%d = %.2f%n", c, tabela[index][coluna-1]);
+					
+				} else if( c > qntVarDecisao && c < coluna -2) {
+					System.out.printf("F%d = %.2f%n", c - qntVarDecisao, tabela[index][coluna-1]);
+				}
+			}
+			
+			index = 0;
+			qntZero = 0;
+			qntUm = 0;
+			
+		}
+		
+		
 	}
 	
 	public static double[][] novasLinhas(double[][] tabela, int colunaPivot) {
