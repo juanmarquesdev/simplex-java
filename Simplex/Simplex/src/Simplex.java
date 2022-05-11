@@ -29,6 +29,7 @@ public class Simplex {
 		funcaoObjetivo(tabela, qntVarDecisao);
 		gerarRestricoes(tabela, qntRestricao, qntVarDecisao);
 		printTabela(tabela, linha, coluna, qntVarDecisao, qntRestricao);
+		printResultados(tabela, linha, coluna, qntVarDecisao, qntRestricao);
 		
 		System.out.println();
 		
@@ -37,6 +38,7 @@ public class Simplex {
 			novasLinhas(tabela, colunaPivot(tabela, coluna));
 			printTabela(tabela, linha, coluna, qntVarDecisao, qntRestricao);
 			printResultados(tabela, linha, coluna, qntVarDecisao, qntRestricao);
+			System.out.println();
 		}
 		
 		
